@@ -127,26 +127,16 @@ nba.getPlayerList = function() {
     });
 };
 
-// nba.autoCompleteNames = (originalList) => {
-//     // const countries = [];
-//     // let i = originalList.length;
-//     // console.log(originalList);
-//     // while (i--) {
-//     //     countries[i] = originalList[i][2];
-//     //     console.log(countries[i]);
-//     // }
-    
-// }
-
-
-
+$('form').on('submit', function(e) {
+    e.preventDefault();
+    let playerOne = $('#myInput').val();
+    console.log(playerOne);
+});
 
 nba.init = async function() {
     const playerList = await nba.getPlayerList();
     // console.log(playerList);
-    // nba.autoCompleteNames(playerList);
     autocomplete(document.getElementById("myInput"), playerList);
-
 };
 
 // Document Ready
