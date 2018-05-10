@@ -2,8 +2,8 @@
 @import 'partials/typography';
 
 .wrapper {
-    max-width: 1040px;
-    margin: 0 auto;
+  max-width: 1040px;
+  margin: 0 auto;
 	padding: 20px;
 	display: flex;
 	justify-content: space-between;
@@ -75,7 +75,10 @@ input[type=submit] {
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
-	border-radius: 10px;
+  border-radius: 10px;
+  img {
+    margin: 0 auto;
+  }
 }
 
 .basic-info {
