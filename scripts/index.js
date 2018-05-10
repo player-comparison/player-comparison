@@ -71,7 +71,7 @@ function autocomplete(inp, arr) {
             addActive(x);
         } else if (e.keyCode == 13) {
             /*If the ENTER key is pressed, prevent the form from being submitted,*/
-            e.preventDefault();
+            // e.preventDefault();
             if (currentFocus > -1) {
                 /*and simulate a click on the "active" item:*/
                 if (x) x[currentFocus].click();
@@ -110,7 +110,7 @@ function autocomplete(inp, arr) {
     });
 } 
 
-////////////////
+//////////////// END OF AUTO COMPLETE
 
 
 const nba = {};
@@ -127,25 +127,49 @@ nba.getPlayerList = function() {
     });
 };
 
-// nba.autoCompleteNames = (originalList) => {
-//     // const countries = [];
-//     // let i = originalList.length;
-//     // console.log(originalList);
-//     // while (i--) {
-//     //     countries[i] = originalList[i][2];
-//     //     console.log(countries[i]);
-//     // }
-    
-// }
+
+// Associate Player Name with PlayerID and return the ID
+nba.getPlayerID = function (playerName, players) {
+	let i = players.length;
+	while (i--) {
+		if (playerName === players[i][2]) {
+			return players[i][0];
+		}
+	}
+};
+
+nba.getPlayerInfo = function (playerID) {
+	return $.ajax({
+		url: `http://stats.nba.com/stats/commonplayerinfo/?PlayerID=${playerID}`,
+		dataType: 'jsonp',
+		method: 'GET'
+	})
+		.then((results) => {
+			return results.resultSets[0].rowSet[0];
+		});
+};
 
 
+// Main source of stuff happening for submit click
+nba.mainAction = async function (playerName1, playerName2, players) {
+	let playerOneID = nba.getPlayerID(playerName1, players);
+	let playerTwoID = nba.getPlayerID(playerName2, players);
+	console.log(playerOneID, playerTwoID);
+	let playerOneInfo = await nba.getPlayerInfo(playerOneID);
+	let playerTwoInfo = await nba.getPlayerInfo(playerTwoID);
+	console.log(playerOneInfo, playerTwoInfo);
 
+};
 
 nba.init = async function() {
-    const playerList = await nba.getPlayerList();
-    // console.log(playerList);
-    // nba.autoCompleteNames(playerList);
-    autocomplete(document.getElementById("myInput"), playerList);
+	const playerList = await nba.getPlayerList();	
+	autocomplete(document.getElementById("myInput"), playerList);
+	autocomplete(document.getElementById("myInput2"), playerList);
+
+	$('form').on('submit', function (e) {
+			e.preventDefault();	
+			nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
+	});
 
 };
 
