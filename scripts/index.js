@@ -138,26 +138,68 @@ nba.getPlayerID = function (playerName, players) {
 	}
 };
 
+// this function gives an array with the basic player information, not including statistics
 nba.getPlayerInfo = function (playerID) {
 	return $.ajax({
 		url: `http://stats.nba.com/stats/commonplayerinfo/?PlayerID=${playerID}`,
 		dataType: 'jsonp',
 		method: 'GET'
 	})
-		.then((results) => {
-			return results.resultSets[0].rowSet[0];
-		});
+    .then((results) => {
+        return results.resultSets[0].rowSet[0];
+    });
 };
+
+nba.getPlayerStats = function(playerID) {
+    return $.ajax({
+        url: `http://stats.nba.com/stats/playercareerstats/?PerMode=PerGame&playerID=${playerID}`,
+        dataType: 'jsonp',
+        method: 'GET'
+    })
+    .then((results) => {
+        return results;
+    });
+}
+
+nba.updateCardBackImage = function(playerID, cardNumber) {
+    $(`.card-back${cardNumber} img`).attr('src', `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png`)
+};
+
+
+nba.updateCardInfo = function(infoArray, cardNumber) {
+    // Changing Name
+    $(`.card-back${cardNumber} .name`).text(infoArray[3]);
+    // Height
+    $(`.card-back${cardNumber} .height`).text(`Height: ${infoArray[10]}`);
+    // Number
+    $(`.card-back${cardNumber} .number`).text(`Number: ${infoArray[13]}`);
+    // Team Name
+    $(`.card-back${cardNumber} .team`).text(`${infoArray[20]} ${infoArray[17]}`);
+}
+
+nba.updateCardStats = function() {
+
+}
 
 
 // Main source of stuff happening for submit click
 nba.mainAction = async function (playerName1, playerName2, players) {
-	let playerOneID = nba.getPlayerID(playerName1, players);
+    // Variables with Player IDS
+    let playerOneID = nba.getPlayerID(playerName1, players);
 	let playerTwoID = nba.getPlayerID(playerName2, players);
-	console.log(playerOneID, playerTwoID);
-	let playerOneInfo = await nba.getPlayerInfo(playerOneID);
+    // Variables with Player Information not including Statistics
+    let playerOneInfo = await nba.getPlayerInfo(playerOneID);
 	let playerTwoInfo = await nba.getPlayerInfo(playerTwoID);
-	console.log(playerOneInfo, playerTwoInfo);
+    // Variables with Player Career Stats
+    let playerOneStats = await nba.getPlayerStats(playerOneID);
+    let playerTwoStats = await nba.getPlayerStats(playerTwoID);
+    // console.log(playerOneStats, playerTwoStats);
+    nba.updateCardInfo(playerOneInfo,1);
+    console.log(playerOneInfo)
+    nba.updateCardInfo(playerTwoInfo, 2);
+    // nba.updateCardStats(playerOneInfo, 1)
+    nba.updateCardBackImage(playerOneID, 1);
+    nba.updateCardBackImage(playerTwoID, 2);
 
 };
 
