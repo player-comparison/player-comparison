@@ -11,7 +11,7 @@ function autocomplete(inp, arr) {
         currentFocus = -1;
         /*create a DIV element that will contain the items (values):*/
         a = document.createElement("DIV");
-        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("id", `${this.id}autocomplete-list`);
         a.setAttribute("class", "autocomplete-items");
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
@@ -30,14 +30,15 @@ function autocomplete(inp, arr) {
          
         /*for each item in the array...*/
             /*check if the item starts with the same letters as the text field value:*/
-            if (arr[y][2].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            // orrysean switch from .substr to .includes() method because ES6!!! and also better search functionality
+            if (arr[y][2].toUpperCase().includes(val.toUpperCase()) ) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
                 
-                // orrysean converted this ti ES6 template literal. Ryan said leave it ugly. 
-                b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}</strong>${arr[y][2].substr(val.length)}<input type='hidden' value='${arr[y][2]}'>`;
-                
+                // orrysean converted this into ES6 template literal. Ryan said leave it ugly. 
+                b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}${arr[y][2].substr(val.length)}<input type='hidden' value='${arr[y][2]}'></strong> `;
+
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function (e) {
                     /*insert the value for the autocomplete text field:*/
@@ -47,13 +48,14 @@ function autocomplete(inp, arr) {
                     closeAllLists();
                 });
                 a.appendChild(b);
+                
             }
         }
     });
 
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function (e) {
-        let x = document.getElementById(this.id + "autocomplete-list");
+        let x = document.getElementById(`${this.id}autocomplete-list`);
         if (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
             /*If the arrow DOWN key is pressed,
@@ -88,15 +90,15 @@ function autocomplete(inp, arr) {
     }
     function removeActive(x) {
         /*a function to remove the "active" class from all autocomplete items:*/
-        for (var i = 0; i < x.length; i++) {
+        for (let i = 0; i < x.length; i++) {
             x[i].classList.remove("autocomplete-active");
         }
     }
     function closeAllLists(elmnt) {
         /*close all autocomplete lists in the document,
         except the one passed as an argument:*/
-        var x = document.getElementsByClassName("autocomplete-items");
-        for (var i = 0; i < x.length; i++) {
+        let x = document.getElementsByClassName("autocomplete-items");
+        for (let i = 0; i < x.length; i++) {
             if (elmnt != x[i] && elmnt != inp) {
                 x[i].parentNode.removeChild(x[i]);
             }
@@ -108,17 +110,10 @@ function autocomplete(inp, arr) {
     });
 } 
 
-
-
 ////////////////
 
 
 const nba = {};
-
-// const playa = nba.playersAll = function(players) {
-// }
-
-// let playerList;
 
 // getPlayerList includes player names and player ID
 nba.getPlayerList = function() {
@@ -132,22 +127,26 @@ nba.getPlayerList = function() {
     });
 };
 
-nba.autoCompleteNames = (originalList) => {
-    // const countries = [];
-    // let i = originalList.length;
-    // console.log(originalList);
-    // while (i--) {
-    //     countries[i] = originalList[i][2];
-    //     console.log(countries[i]);
-    // }
+// nba.autoCompleteNames = (originalList) => {
+//     // const countries = [];
+//     // let i = originalList.length;
+//     // console.log(originalList);
+//     // while (i--) {
+//     //     countries[i] = originalList[i][2];
+//     //     console.log(countries[i]);
+//     // }
     
-}
+// }
+
+
+
 
 nba.init = async function() {
     const playerList = await nba.getPlayerList();
     // console.log(playerList);
-    nba.autoCompleteNames(playerList);
+    // nba.autoCompleteNames(playerList);
     autocomplete(document.getElementById("myInput"), playerList);
+
 };
 
 // Document Ready
