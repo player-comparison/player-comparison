@@ -1,6 +1,14 @@
 @import 'partials/setup';
 @import 'partials/typography';
 
+body {
+	background-image: url(../images/background-image.jpg);
+	background-color: black;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 50px;
+	min-height: 100vh;
+}
 
 .wrapper {
   max-width: 1040px;
@@ -8,19 +16,23 @@
 	padding: 20px;
 	display: flex;
 	justify-content: space-between;
-  flex-wrap: wrap;
+	align-items: center;
+	flex-wrap: wrap;
+	perspective: 100vw;
 }
 
 form {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 50px;
 }
 // ********* START OF AUTOCOMPLETE STYLING ********* 
 .autocomplete {
   /*the container must be positioned relative:*/
   position: relative;
-  display: inline-block;
+	display: inline-block;
+	width: 360px;
 }
 input {
   border: 1px solid transparent;
@@ -29,13 +41,30 @@ input {
   font-size: 16px;
 }
 input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
+  background-color: transparent;
+	width: 100%;
+	border: 3px solid white;
+	color: white;
+	&:focus{
+		box-shadow: 0 0 5px white, 0 0 10px dodgerblue, 0 0 15px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+	}
 }
-input[type=submit] {
+#compare {
   background-color: DodgerBlue;
-  color: #fff;
+	color: #fff;
+	line-height: 1;
+	border: none;
+	padding: 20px 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	&:hover {
+		border: 5px solid dodgerblue;
+		color: white;
+		background: rgba(255,255,255,0);
+		box-shadow: 0 0 5px white, 0 0 10px dodgerblue, 0 0 15px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+	}
 }
+
 .autocomplete-items {
   position: absolute;
   border: 1px solid #d4d4d4;
@@ -69,26 +98,55 @@ input[type=submit] {
 
 .card-back {
 	width: 360px;
-	background: mediumslateblue;
+	background: rgba(255,255,255,0.3);
 	padding: 20px;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
-  	border-radius: 10px;
-	  
+	border-radius: 2px;
+	border: 15px solid white;
+	border-top: 20px solid white;
+	border-bottom: 20px solid white;
+	box-shadow: 0px 5px 10px black, 0 5px 30px black;
+	position: relative;
+	
 	img {
-    	margin: 0 auto;
+		margin: 0 auto;
+		display: block;
 	}
+}
 
-	&:hover {
-		// transform:  scale(5);
-		// transition: scale 1s;
-		display: none;
-	}
+.image-container::after {
+	content: '';
+	background-color: white; 
+	position: absolute;
+	width: 100%;
+	height: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+}
 
+.text-container {
+	margin-top: 25px;
 
+}
+
+.rotate-card1 {
+	transform: rotateY(25deg);
+	box-shadow: -5px 5px 20px black, 0 5px 40px black;
+}
+
+.rotate-card2 {
+	transform: rotateY(-25deg);
+	box-shadow: 5px 5px 20px black, 0 5px 40px black;
+}
+
+.rotate-card {
+	transition: all 1s;
+	transform-style: preserve-3d;
+	outline: 1px solid white;
 }
 
 .basic-info {
@@ -114,4 +172,8 @@ input[type=submit] {
 		padding: 5px;
 	}
 }
+
+
+
+
 
