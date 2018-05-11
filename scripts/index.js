@@ -168,7 +168,10 @@ nba.getPlayerStats = function(playerID) {
 }
 
 nba.updateCardBackImage = function(playerID, cardNumber) {
-	$(`.card-back${cardNumber} img`).attr('src', `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png`);
+    $(`.card-back${cardNumber} .image-container`).empty();
+    $(`.card-back${cardNumber} .image-container`).append(`<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png" alt="" onerror="this.onerror=null;this.src='https://stats.nba.com/media/img/league/nba-headshot-fallback.png';">`);
+    $(`.card-back${cardNumber}`).addClass(`rotate-card${cardNumber}`);
+    $(`.card-back${cardNumber}`).addClass(`rotate-card`);
 	
 };
 
@@ -215,9 +218,9 @@ nba.init = async function() {
 	autocomplete(document.getElementById("myInput"), playerList);
 	autocomplete(document.getElementById("myInput2"), playerList);
 
-	$('form').on('submit', function (e) {
+	$('#compare').on('click', function (e) {
 			e.preventDefault();	
-			nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
+            nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
 	});
 
 };
