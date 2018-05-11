@@ -37,7 +37,7 @@ function autocomplete(inp, arr) {
                 /*make the matching letters bold:*/
                 
                 // orrysean converted this into ES6 template literal. Ryan said leave it ugly. 
-                b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}${arr[y][2].substr(val.length)}<input type='hidden' value='${arr[y][2]}'></strong> `;
+                b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}${arr[y][2].substr(val.length)}<input type='hidden' value="${arr[y][2]}"></strong> `;
 
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function (e) {
@@ -76,7 +76,13 @@ function autocomplete(inp, arr) {
                 /*and simulate a click on the "active" item:*/
                 if (x) x[currentFocus].click();
             }
-        }
+		} 
+		// else if (e.keyCode == 9) {
+		// 	if ($("#myInput").focus()) {
+		// 	}
+		// 	else if ($("#myInput2").focus()) {
+		// 	}
+		// }
     });
     function addActive(x) {
         /*a function to classify an item as "active":*/
@@ -162,7 +168,8 @@ nba.getPlayerStats = function(playerID) {
 }
 
 nba.updateCardBackImage = function(playerID, cardNumber) {
-    $(`.card-back${cardNumber} img`).attr('src', `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png`)
+	$(`.card-back${cardNumber} img`).attr('src', `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png`);
+	
 };
 
 
@@ -187,12 +194,13 @@ nba.mainAction = async function (playerName1, playerName2, players) {
     // Variables with Player IDS
     let playerOneID = nba.getPlayerID(playerName1, players);
 	let playerTwoID = nba.getPlayerID(playerName2, players);
-    // Variables with Player Information not including Statistics
-    let playerOneInfo = await nba.getPlayerInfo(playerOneID);
-	let playerTwoInfo = await nba.getPlayerInfo(playerTwoID);
+	// Variables with Player Information not including Statistics
+	let results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]);
+    let playerOneInfo = results[0];
+	let playerTwoInfo = results[1];
     // Variables with Player Career Stats
-    let playerOneStats = await nba.getPlayerStats(playerOneID);
-    let playerTwoStats = await nba.getPlayerStats(playerTwoID);
+	let playerOneStats = results[2];
+	let playerTwoStats = results[3];
     // console.log(playerOneStats, playerTwoStats);
     nba.updateCardInfo(playerOneInfo,1);
     console.log(playerOneInfo)
@@ -200,7 +208,6 @@ nba.mainAction = async function (playerName1, playerName2, players) {
     // nba.updateCardStats(playerOneInfo, 1)
     nba.updateCardBackImage(playerOneID, 1);
     nba.updateCardBackImage(playerTwoID, 2);
-
 };
 
 nba.init = async function() {
