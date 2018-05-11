@@ -1,13 +1,14 @@
 @import 'partials/setup';
 @import 'partials/typography';
 
+
 .wrapper {
   max-width: 1040px;
   margin: 0 auto;
 	padding: 20px;
 	display: flex;
 	justify-content: space-between;
-	flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 form {

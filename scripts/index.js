@@ -210,7 +210,7 @@ nba.init = async function() {
 
 	$('form').on('submit', function (e) {
 			e.preventDefault();	
-			nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
+            nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
 	});
 
 };
