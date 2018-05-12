@@ -7,19 +7,14 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 50px;
-	min-height: 100vh;	
 	position: relative; // to position basketball net
 }
 
 .wrapper {
-  max-width: 1040px;
-  margin: 0 auto;
+	max-width: 1040px;
+	min-height: 100vh;
+	margin: 0 auto;
 	padding: 20px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-wrap: wrap;
-	perspective: 100vw;
 }
 
 form {
@@ -28,6 +23,15 @@ form {
 	justify-content: space-between;
 	margin-bottom: 50px;
 }
+
+.card-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	perspective: 1920px;
+	perspective-origin: center center;
+}
+
 // ********* START OF AUTOCOMPLETE STYLING ********* 
 .autocomplete {
   /*the container must be positioned relative:*/
@@ -129,6 +133,10 @@ input[type=text] {
 	transform: translateX(-50%);
 }
 
+.image-container, .text-container {
+	width: 100%;
+}
+
 .text-container {
 	margin-top: 25px;
 
@@ -170,7 +178,7 @@ input[type=text] {
 	li {
 		display: flex;
 		justify-content: space-between;
-		padding: 5px;
+		padding: 5px 0;
 	}
 }
 

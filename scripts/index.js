@@ -187,9 +187,41 @@ nba.updateCardInfo = function(infoArray, cardNumber) {
     $(`.card-back${cardNumber} .team`).text(`${infoArray[20]} ${infoArray[17]}`);
 }
 
-nba.updateCardStats = function() {
-
-}
+nba.updateCardStats = function(playerStats, cardNumber) {
+	// 0	"PLAYER_ID"
+	// 1	"LEAGUE_ID"
+	// 2	"Team_ID"
+	// 3	"GP"
+	// 4	"GS"
+	// 5	"MIN"
+	// 6	"FGM"
+	// 7	"FGA"
+	// 8	"FG_PCT"
+	// 9	"FG3M"
+	// 10	"FG3A"
+	// 11	"FG3_PCT"
+	// 12	"FTM"
+	// 13	"FTA"
+	// 14	"FT_PCT"
+	// 15	"OREB"
+	// 16	"DREB"
+	// 17	"REB"
+	// 18	"AST"
+	// 19	"STL"
+	// 20	"BLK"
+	// 21	"TOV"
+	// 22	"PF"
+	// 23	"PTS"
+	careerStats = playerStats.resultSets[1].rowSet[0];
+	$(`.card-back${cardNumber} .points p`).text(careerStats[23]);
+	$(`.card-back${cardNumber} .assists p`).text(careerStats[18]);
+	$(`.card-back${cardNumber} .steals p`).text(careerStats[19]);
+	$(`.card-back${cardNumber} .rebounds p`).text(careerStats[17]);
+	$(`.card-back${cardNumber} .blocks p`).text(careerStats[20]);
+	$(`.card-back${cardNumber} .fg p`).text(`${Math.round(careerStats[8] * 1000)/10}%`);
+	$(`.card-back${cardNumber} .3pt p`).text(`${Math.round(careerStats[11] * 1000)/10}%`);
+	$(`.card-back${cardNumber} .gp p`).text(careerStats[3]);
+};
 
 
 // Main source of stuff happening for submit click
@@ -210,7 +242,10 @@ nba.mainAction = async function (playerName1, playerName2, players) {
     nba.updateCardInfo(playerTwoInfo, 2);
     // nba.updateCardStats(playerOneInfo, 1)
     nba.updateCardBackImage(playerOneID, 1);
-    nba.updateCardBackImage(playerTwoID, 2);
+	nba.updateCardBackImage(playerTwoID, 2);
+	console.log(playerOneStats, playerTwoStats);
+	nba.updateCardStats(playerOneStats, 1);
+	nba.updateCardStats(playerTwoStats, 2);
 };
 
 nba.init = async function() {
