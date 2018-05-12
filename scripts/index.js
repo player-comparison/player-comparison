@@ -171,8 +171,9 @@ nba.updateCardBackImage = function(playerID, cardNumber) {
     $(`.card-back${cardNumber} .image-container`).empty();
     $(`.card-back${cardNumber} .image-container`).append(`<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png" alt="" onerror="this.onerror=null;this.src='https://stats.nba.com/media/img/league/nba-headshot-fallback.png';" class="fadeIn animated">`);
     $(`.card-back${cardNumber}`).addClass(`rotate-card${cardNumber}`);
-    $(`.card-back${cardNumber}`).addClass(`rotate-card`);
-    // $(`.card-back${cardNumber} .image-container img`).addClass('bounceInLeft');
+	$(`.card-back${cardNumber}`).addClass(`rotate-card`);
+	$(`.card-back${cardNumber} .image-container`).append(`<div class="horizontal-bar fadeIn animated"></div>`);
+	$(`.card-back${cardNumber}`).append(`<div class="card-piping fadeIn animated"></div>`);
 };
 
 
@@ -224,9 +225,49 @@ nba.updateCardStats = function(playerStats, cardNumber) {
 };
 
 nba.updateTeamLogo = function(playerInfo, cardNumber) {
-	$(`.card-back${cardNumber} .image-container`).append(`<img src="https://stats.nba.com/media/img/teams/logos/${playerInfo[18]}_logo.svg" class="logo logo${cardNumber} animated fadeIn${cardNumber}" alt="" onerror="this.onerror=null;this.src='';">`)
+	$(`.card-back${cardNumber} .image-container`).append(`<div class="logo-container logo${cardNumber} animated fadeIn${cardNumber}"><img src="https://stats.nba.com/media/img/teams/logos/${playerInfo[18]}_logo.svg" class="logo" alt="" onerror="this.onerror=null;this.src='';"></div>`)
 }
 
+nba.updateCardColor = function(playerInfo, cardNumber) {
+	teamColors = {
+		ATL: ["225, 68, 52", "196, 214, 0"],
+		BKN: ["0, 0, 0", "255, 255, 255"],
+		BOS: ["0, 122, 51", "139, 111, 78"],
+		CHA: ["29, 17, 96", "0, 120, 140"],
+		CHI: ["206, 17, 65", "6, 35, 34"],
+		CLE: ["111, 38, 61", "4, 30, 66"],
+		DAL: ["0, 83, 188", "0, 43, 92"],
+		DEN: ["0, 45, 98", "81, 145, 205"],
+		DET: ["237, 23, 76", "0, 107, 182"],
+		GSW: ["0, 107, 182", "253, 185, 39"],
+		HOU: ["206 17 65", "6, 25, 34"],
+		IND: ["0, 45, 98", "23, 187, 48"],
+		LAC: ["237, 23, 76", "0, 107, 182"],
+		LAL: ["85, 37, 130", "253, 185, 39"],
+		MEM: ["97, 137, 185", "0, 40, 94"],
+		MIA: ["152, 0, 46", "249, 160, 27"],
+		MIL: ["0, 71, 27", "240, 235, 210"],
+		MIN: ["12, 35, 64", "35, 97, 146"],
+		NOP: ["0, 22, 65", "225, 58, 62"],
+		NYK: ["0, 107, 182", "245, 132, 38"],
+		OKC: ["0, 122, 193", "239, 59, 36"],
+		ORL: ["0, 125, 297", "6, 25, 34"],
+		PHI: ["0, 107, 82", "237, 23, 76"],
+		PHX: ["29, 17, 96", "229, 95, 32"],
+		POR: ["224, 58, 62", "6, 25, 34"],
+		SAC: ["91, 43, 130", "99, 113, 122"],
+		SAS: ["196, 206, 211", "6, 25, 34"],
+		TOR: ["206, 17, 65", "6, 25, 34"],
+		UTA: ["0, 43, 92", "249, 160, 27"],
+		WAS: ["0, 43, 92", "227, 24, 55"],
+		SEA: ["0, 101, 58", "255, 194, 32"],
+	};
+	$(`.card-back${cardNumber}`).css("border-color", `rgb(${teamColors[playerInfo[18]][0]})`);
+	$(`.card-back${cardNumber}`).css("outline-color", `rgb(${teamColors[playerInfo[18]][0]})`);
+	$(`.card-back${cardNumber} .image-container .horizontal-bar`).css("background-color", `rgb(${teamColors[playerInfo[18]][0]})`);
+	$(`.card-back${cardNumber} .card-piping`).css("border-color", `rgb(${teamColors[playerInfo[18]][1]})`);
+	// card-back after element secondary colour	console.log(teamColors);
+};
 
 // Main source of stuff happening for submit click
 nba.mainAction = async function (playerName1, playerName2, players) {
@@ -252,6 +293,8 @@ nba.mainAction = async function (playerName1, playerName2, players) {
 	nba.updateCardStats(playerTwoStats, 2);
 	nba.updateTeamLogo(playerOneInfo, 1);
 	nba.updateTeamLogo(playerTwoInfo, 2);
+	nba.updateCardColor(playerOneInfo, 1);
+	nba.updateCardColor(playerTwoInfo, 2);
 };
 
 nba.init = async function() {
