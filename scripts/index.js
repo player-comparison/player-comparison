@@ -37,7 +37,7 @@ function autocomplete(inp, arr) {
                 /*make the matching letters bold:*/
                 
                 // orrysean converted this into ES6 template literal. Ryan said leave it ugly. 
-                b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}${arr[y][2].substr(val.length)}<input type='hidden' value='${arr[y][2]}'></strong> `;
+                b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}${arr[y][2].substr(val.length)}<input type='hidden' value="${arr[y][2]}"></strong> `;
 
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function (e) {
@@ -188,11 +188,13 @@ nba.mainAction = async function (playerName1, playerName2, players) {
     let playerOneID = nba.getPlayerID(playerName1, players);
 	let playerTwoID = nba.getPlayerID(playerName2, players);
     // Variables with Player Information not including Statistics
-    let playerOneInfo = await nba.getPlayerInfo(playerOneID);
-	let playerTwoInfo = await nba.getPlayerInfo(playerTwoID);
+    let results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID, nba.getPlayerStats(playerTwoID))]);
+    
+    let playerOneInfo = results[0];//await nba.getPlayerInfo(playerOneID);
+	let playerTwoInfo = results[1];//await nba.getPlayerInfo(playerTwoID);
     // Variables with Player Career Stats
-    let playerOneStats = await nba.getPlayerStats(playerOneID);
-    let playerTwoStats = await nba.getPlayerStats(playerTwoID);
+    let playerOneStats = results[2];
+    let playerTwoStats = results[3];
     // console.log(playerOneStats, playerTwoStats);
     nba.updateCardInfo(playerOneInfo,1);
     console.log(playerOneInfo)
