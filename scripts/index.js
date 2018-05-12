@@ -169,10 +169,10 @@ nba.getPlayerStats = function(playerID) {
 
 nba.updateCardBackImage = function(playerID, cardNumber) {
     $(`.card-back${cardNumber} .image-container`).empty();
-    $(`.card-back${cardNumber} .image-container`).append(`<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png" alt="" onerror="this.onerror=null;this.src='https://stats.nba.com/media/img/league/nba-headshot-fallback.png';">`);
+    $(`.card-back${cardNumber} .image-container`).append(`<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png" alt="" onerror="this.onerror=null;this.src='https://stats.nba.com/media/img/league/nba-headshot-fallback.png';" class="fadeIn animated">`);
     $(`.card-back${cardNumber}`).addClass(`rotate-card${cardNumber}`);
     $(`.card-back${cardNumber}`).addClass(`rotate-card`);
-	
+    // $(`.card-back${cardNumber} .image-container img`).addClass('bounceInLeft');
 };
 
 
@@ -224,7 +224,7 @@ nba.updateCardStats = function(playerStats, cardNumber) {
 };
 
 nba.updateTeamLogo = function(playerInfo, cardNumber) {
-	$(`.card-back${cardNumber} .image-container`).append(`<img src="https://stats.nba.com/media/img/teams/logos/${playerInfo[18]}_logo.svg" class="logo logo${cardNumber}" alt="" onerror="this.onerror=null;this.src='';">`)
+	$(`.card-back${cardNumber} .image-container`).append(`<img src="https://stats.nba.com/media/img/teams/logos/${playerInfo[18]}_logo.svg" class="logo logo${cardNumber} animated fadeIn${cardNumber}" alt="" onerror="this.onerror=null;this.src='';">`)
 }
 
 
