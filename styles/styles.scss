@@ -7,7 +7,8 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 50px;
-	min-height: 100vh;
+	min-height: 100vh;	
+	position: relative; // to position basketball net
 }
 
 .wrapper {
@@ -172,6 +173,28 @@ input[type=text] {
 		padding: 5px;
 	}
 }
+
+// Styling basketball net 
+.net {
+	position: absolute; // set body to pos-r
+	top: 0;
+	left: -20px;
+	opacity: 0.4;
+}
+.net-container {
+	position: relative;
+}
+
+.net-container:after {
+	display: block;
+	position: absolute;
+	background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0, black 100%);
+	// margin-top: -150px;
+	height: 400px;
+	width: 35%;
+	content: '';
+}
+
 
 
 
