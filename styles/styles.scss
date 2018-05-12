@@ -53,23 +53,31 @@ input[type=text] {
 	width: 100%;
 	border: 3px solid white;
 	color: white;
+	transition: 0.2s;
+	&:hover,
 	&:focus{
-		box-shadow: 0 0 5px white, 0 0 10px dodgerblue, 0 0 15px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+		box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
+		border: 1px solid white;
+		margin-top: 3px;
 	}
 }
 #compare {
-  background-color: DodgerBlue;
-	color: #fff;
+  background-color: white;
+	color: black;
 	line-height: 1;
 	border: none;
 	padding: 20px 30px;
 	text-transform: uppercase;
 	font-weight: bold;
+	transition: all 0.2s;
 	&:hover {
-		border: 5px solid dodgerblue;
+		border: 3px solid white;
 		color: white;
-		background: rgba(255,255,255,0);
-		box-shadow: 0 0 5px white, 0 0 10px dodgerblue, 0 0 15px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+		background: rgba(255, 255, 255, 0);
+		box-shadow: 0 0 5px white, 0 0 10px;
+	}
+	&:active {
+		opacity: 0.5;
 	}
 }
 
@@ -113,7 +121,6 @@ input[type=text] {
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
-	border-radius: 2px;
 	border: 15px solid white;
 	border-top: 20px solid white;
 	border-bottom: 20px solid white;
@@ -124,6 +131,18 @@ input[type=text] {
 		margin: 0 auto;
 		display: block;
 	}
+}
+
+.card-back:after {
+	content: '';
+	width: calc(100% + 20px);
+	height: calc(100% + 30px);
+	border: 2px solid black;
+	position: absolute;
+	background-color: rgba(0,0,0,0);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .image-container::after {
@@ -199,9 +218,8 @@ input[type=text] {
 	display: block;
 	position: absolute;
 	background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0, black 100%);
-	// margin-top: -150px;
 	height: 400px;
-	width: 35%;
+	width: 25%;
 	content: '';
 }
 
