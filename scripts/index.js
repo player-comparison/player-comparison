@@ -76,7 +76,13 @@ function autocomplete(inp, arr) {
                 /*and simulate a click on the "active" item:*/
                 if (x) x[currentFocus].click();
             }
-        }
+		} 
+		// else if (e.keyCode == 9) {
+		// 	if ($("#myInput").focus()) {
+		// 	}
+		// 	else if ($("#myInput2").focus()) {
+		// 	}
+		// }
     });
     function addActive(x) {
         /*a function to classify an item as "active":*/
@@ -162,7 +168,11 @@ nba.getPlayerStats = function(playerID) {
 }
 
 nba.updateCardBackImage = function(playerID, cardNumber) {
-    $(`.card-back${cardNumber} img`).attr('src', `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png`)
+    $(`.card-back${cardNumber} .image-container`).empty();
+    $(`.card-back${cardNumber} .image-container`).append(`<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${playerID}.png" alt="" onerror="this.onerror=null;this.src='https://stats.nba.com/media/img/league/nba-headshot-fallback.png';">`);
+    $(`.card-back${cardNumber}`).addClass(`rotate-card${cardNumber}`);
+    $(`.card-back${cardNumber}`).addClass(`rotate-card`);
+	
 };
 
 
@@ -187,14 +197,13 @@ nba.mainAction = async function (playerName1, playerName2, players) {
     // Variables with Player IDS
     let playerOneID = nba.getPlayerID(playerName1, players);
 	let playerTwoID = nba.getPlayerID(playerName2, players);
-    // Variables with Player Information not including Statistics
-    let results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID, nba.getPlayerStats(playerTwoID))]);
-    
-    let playerOneInfo = results[0];//await nba.getPlayerInfo(playerOneID);
-	let playerTwoInfo = results[1];//await nba.getPlayerInfo(playerTwoID);
+	// Variables with Player Information not including Statistics
+	let results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]);
+    let playerOneInfo = results[0];
+	let playerTwoInfo = results[1];
     // Variables with Player Career Stats
-    let playerOneStats = results[2];
-    let playerTwoStats = results[3];
+	let playerOneStats = results[2];
+	let playerTwoStats = results[3];
     // console.log(playerOneStats, playerTwoStats);
     nba.updateCardInfo(playerOneInfo,1);
     console.log(playerOneInfo)
@@ -202,7 +211,6 @@ nba.mainAction = async function (playerName1, playerName2, players) {
     // nba.updateCardStats(playerOneInfo, 1)
     nba.updateCardBackImage(playerOneID, 1);
     nba.updateCardBackImage(playerTwoID, 2);
-
 };
 
 nba.init = async function() {
@@ -210,9 +218,9 @@ nba.init = async function() {
 	autocomplete(document.getElementById("myInput"), playerList);
 	autocomplete(document.getElementById("myInput2"), playerList);
 
-	$('form').on('submit', function (e) {
+	$('#compare').on('click', function (e) {
 			e.preventDefault();	
-			nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
+            nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
 	});
 
 };
