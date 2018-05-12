@@ -223,6 +223,10 @@ nba.updateCardStats = function(playerStats, cardNumber) {
 	$(`.card-back${cardNumber} .gp p`).text(careerStats[3]);
 };
 
+nba.updateTeamLogo = function(playerInfo, cardNumber) {
+	$(`.card-back${cardNumber} .image-container`).append(`<img src="https://stats.nba.com/media/img/teams/logos/${playerInfo[18]}_logo.svg" class="logo logo${cardNumber}" alt="" onerror="this.onerror=null;this.src='';">`)
+}
+
 
 // Main source of stuff happening for submit click
 nba.mainAction = async function (playerName1, playerName2, players) {
@@ -246,6 +250,8 @@ nba.mainAction = async function (playerName1, playerName2, players) {
 	console.log(playerOneStats, playerTwoStats);
 	nba.updateCardStats(playerOneStats, 1);
 	nba.updateCardStats(playerTwoStats, 2);
+	nba.updateTeamLogo(playerOneInfo, 1);
+	nba.updateTeamLogo(playerTwoInfo, 2);
 };
 
 nba.init = async function() {
