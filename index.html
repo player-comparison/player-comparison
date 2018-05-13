@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Player Comparison</title>    
+	<title>Player Comparison</title>    
+	<link href="https://fonts.googleapis.com/css?family=Orbitron:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="styles/animate.css">
 	<link rel="stylesheet" href="styles/styles.css">
 </head>
@@ -13,15 +14,29 @@
 	<div class="net-container">
 		<img src="images/net.png" class="net" alt="Image of Basketball Net">
 	</div>
+
+	<!-- Shotclock Image -->
+	<div class="shotclock-container">
+		<img src="images/shotclock.png" class="shotclock" alt="Image of an NBA Shotclock">
+	</div>
 	
 	<main class="wrapper">
+		<h1 class="title">NBA Player Comparison</h1>
+		<h1 class="player-select">Select Two Players</h1>
+
+		<div id="ballWrapper">
+			<div id="ball">
+				<span id="ballshad"></span>
+			</div>
+			<div id="ballShadow"></div>
+		</div>
         <!--Make sure the form has the autocomplete function switched off:-->
         <form autocomplete="off" action="">
             <div class="autocomplete">
-                <input id="myInput" type="text" name="myCountry" placeholder="Player Names">
+                <input id="myInput" type="text" name="myCountry" placeholder="Player One">
 			</div>
 			<div class="autocomplete">
-				<input id="myInput2" type="text" name="myCountry" placeholder="Player Names">
+				<input id="myInput2" type="text" name="myCountry" placeholder="Player Two">
 			</div>
            
 		</form>
