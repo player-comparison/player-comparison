@@ -310,6 +310,8 @@ nba.init = async function() {
             playerOneStats = results[2];
             playerTwoStats = results[3];
             nba.mainAction(playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, playerList);
+            $('.card-back').css("display", "block");
+            $('#ballWrapper').css("display", "none");
 	});
 
 };
