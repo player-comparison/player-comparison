@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Player Comparison</title>    
-    <link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" href="styles/animate.css">
+	<link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <main class="wrapper">
+	<!-- Basketball Net Image -->
+	<div class="net-container">
+		<img src="images/net.png" class="net" alt="Image of Basketball Net">
+	</div>
+	
+	<main class="wrapper">
         <!--Make sure the form has the autocomplete function switched off:-->
         <form autocomplete="off" action="">
             <div class="autocomplete">
@@ -20,7 +26,6 @@
            
 		</form>
 		
-		
 
 		<!-- <div class="card-front">
 			<div class="image-container">
@@ -31,128 +36,112 @@
 				<h1 class="number"></h1>
 			</div>
 		</div> -->
-
-		<div class="card-back card-back1">
-            <div class="image-container">
-                <img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612761/2017/260x190/201942.png" alt="">
-			</div>
-			<div class="text-container">
-				<h2 class="name">Giannis Antetokounmpo</h2>
-			
-				<div class="basic-info">
-					<p class="height"><span>Height:</span></p>
-					<p class="number"><span>Numebr:</span></p>
-					<p class="team"><span>Team Name:</span></p>
+		<div class="card-container">
+			<div class="card-back card-back1">
+				<div class="image-container">
+					<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612761/2017/260x190/201942.png" alt="">
 				</div>
-				<ul class="stats-container">
-					<li class="points">
-						<h3>Points</h3>
-						<p>33</p>
-					</li>
-					<li class="assists">
-						<h3>Assists</h3>
-						<p>33</p>
-					</li>
-					<li class="steals">
-						<h3>Steals</h3>
-						<p>33</p>
-					</li>
-					<li class="rebounds">
-						<h3>Rebounds</h3>
-						<p>33</p>
-					</li>
-					<li class="blocks">
-						<h3>Blocks</h3>
-						<p>33</p>
-					</li>
-					<li class="fg%">
-						<h3>Field Goal Pct</h3>
-						<p>33</p>
-					</li>
-					<li class="3pt%">
-						<h3>3-point Pct</h3>
-						<p>33</p>
-					</li>
-					<li class="3pm">
-						<h3>3-point Made</h3>
-						<p>33</p>
-					</li>
-					<li class="gp">
-						<h3>Games Played</h3>
-						<p>33</p>
-					</li>
-					<li class="minutes">
-						<h3>Minutes Played</h3>
-						<p>33</p>
-					</li>
-				</ul>
+				<div class="text-container">
+					<h2 class="name">Giannis Antetokounmpo</h2>
+				
+					<div class="basic-info">
+						<p class="height"><span>Height:</span></p>
+						<p class="number"><span>Numebr:</span></p>
+						<p class="team"><span>Team Name:</span></p>
+					</div>
+					<ul class="stats-container">
+						<li class="points">
+							<h3>Points</h3>
+							<p>33</p>
+						</li>
+						<li class="assists">
+							<h3>Assists</h3>
+							<p>33</p>
+						</li>
+						<li class="steals">
+							<h3>Steals</h3>
+							<p>33</p>
+						</li>
+						<li class="rebounds">
+							<h3>Rebounds</h3>
+							<p>33</p>
+						</li>
+						<li class="blocks">
+							<h3>Blocks</h3>
+							<p>33</p>
+						</li>
+						<li class="fg">
+							<h3>Field Goal Pct</h3>
+							<p>33</p>
+						</li>
+						<li class="3pt">
+							<h3>3-point Pct</h3>
+							<p>33</p>
+						</li>
+						<li class="gp">
+							<h3>Games Played</h3>
+							<p>33</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<button id="compare">Compare</p></button>
+
+			<div class="card-back card-back2">
+				<div class="image-container">
+					<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612761/2017/260x190/201942.png" alt="">
+				</div>
+				<div class="text-container">
+					<h2 class="name">Giannis Antetokounmpo</h2>
+					<div class="basic-info">
+						<p class="height">
+							<span>Height:</span>
+						</p>
+						<p class="number">
+							<span>Numebr:</span>
+						</p>
+						<p class="team">
+							<span>Team Name:</span>
+						</p>
+					</div>
+					<ul class="stats-container">
+						<li class="points">
+							<h3>Points</h3>
+							<p>33</p>
+						</li>
+						<li class="assists">
+							<h3>Assists</h3>
+							<p>33</p>
+						</li>
+						<li class="steals">
+							<h3>Steals</h3>
+							<p>33</p>
+						</li>
+						<li class="rebounds">
+							<h3>Rebounds</h3>
+							<p>33</p>
+						</li>
+						<li class="blocks">
+							<h3>Blocks</h3>
+							<p>33</p>
+						</li>
+						<li class="fg">
+							<h3>Field Goal Pct</h3>
+							<p>33</p>
+						</li>
+						<li class="3pt">
+							<h3>3-point Pct</h3>
+							<p>33</p>
+						</li>
+						<li class="gp">
+							<h3>Games Played</h3>
+							<p>33</p>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-
-		<button id="compare">Compare</p></button>
-
-		<div class="card-back card-back2">
-			<div class="image-container">
-				<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612761/2017/260x190/201942.png" alt="">
-			</div>
-			<div class="text-container">
-				<h2 class="name">Giannis Antetokounmpo</h2>
-				<div class="basic-info">
-					<p class="height">
-						<span>Height:</span>
-					</p>
-					<p class="number">
-						<span>Numebr:</span>
-					</p>
-					<p class="team">
-						<span>Team Name:</span>
-					</p>
-				</div>
-				<ul class="stats-container">
-					<li class="points">
-						<h3>Points</h3>
-						<p>33</p>
-					</li>
-					<li class="assists">
-						<h3>Assists</h3>
-						<p>33</p>
-					</li>
-					<li class="steals">
-						<h3>Steals</h3>
-						<p>33</p>
-					</li>
-					<li class="rebounds">
-						<h3>Rebounds</h3>
-						<p>33</p>
-					</li>
-					<li class="blocks">
-						<h3>Blocks</h3>
-						<p>33</p>
-					</li>
-					<li class="fg%">
-						<h3>Field Goal Pct</h3>
-						<p>33</p>
-					</li>
-					<li class="3pt%">
-						<h3>3-point Pct</h3>
-						<p>33</p>
-					</li>
-					<li class="3pm">
-						<h3>3-point Made</h3>
-						<p>33</p>
-					</li>
-					<li class="gp">
-						<h3>Games Played</h3>
-						<p>33</p>
-					</li>
-					<li class="minutes">
-						<h3>Minutes Played</h3>
-						<p>33</p>
-					</li>
-				</ul>
-			</div>
-		</div>
-
 
 
     </main>

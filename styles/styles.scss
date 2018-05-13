@@ -7,18 +7,17 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 50px;
-	min-height: 100vh;
+	position: relative; // to position basketball net
 }
 
 .wrapper {
-  max-width: 1040px;
-  margin: 0 auto;
+	max-width: 1040px;
+	min-height: 100vh;
+	margin: 0 auto;
 	padding: 20px;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-wrap: wrap;
-	perspective: 100vw;
+	flex-direction: column;
+	justify-content: center;
 }
 
 form {
@@ -27,6 +26,15 @@ form {
 	justify-content: space-between;
 	margin-bottom: 50px;
 }
+
+.card-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	perspective: 1920px;
+	perspective-origin: center center;
+}
+
 // ********* START OF AUTOCOMPLETE STYLING ********* 
 .autocomplete {
   /*the container must be positioned relative:*/
@@ -45,23 +53,31 @@ input[type=text] {
 	width: 100%;
 	border: 3px solid white;
 	color: white;
+	transition: 0.2s;
+	&:hover,
 	&:focus{
-		box-shadow: 0 0 5px white, 0 0 10px dodgerblue, 0 0 15px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+		box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
+		border: 1px solid white;
+		margin-top: 3px;
 	}
 }
 #compare {
-  background-color: DodgerBlue;
-	color: #fff;
+  background-color: white;
+	color: black;
 	line-height: 1;
 	border: none;
 	padding: 20px 30px;
 	text-transform: uppercase;
 	font-weight: bold;
+	transition: all 0.2s;
 	&:hover {
-		border: 5px solid dodgerblue;
+		border: 3px solid white;
 		color: white;
-		background: rgba(255,255,255,0);
-		box-shadow: 0 0 5px white, 0 0 10px dodgerblue, 0 0 15px dodgerblue, 0 0 25px dodgerblue, 0 0 30px dodgerblue;
+		background: rgba(255, 255, 255, 0);
+		box-shadow: 0 0 5px white, 0 0 10px;
+	}
+	&:active {
+		opacity: 0.5;
 	}
 }
 
@@ -105,7 +121,6 @@ input[type=text] {
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
-	border-radius: 2px;
 	border: 15px solid white;
 	border-top: 20px solid white;
 	border-bottom: 20px solid white;
@@ -118,19 +133,34 @@ input[type=text] {
 	}
 }
 
-.image-container::after {
-	content: '';
-	background-color: white; 
-	position: absolute;
+// .card-back:after {
+// 	content: '';
+// 	width: calc(100% + 20px);
+// 	height: calc(100% + 30px);
+// 	border: 2px solid black;
+// 	position: absolute;
+// 	background-color: rgba(0,0,0,0);
+// 	left: 50%;
+// 	top: 50%;
+// 	transform: translate(-50%, -50%);
+// }
+
+// .image-container::after {
+// 	content: '';
+// 	background-color: white; 
+// 	position: absolute;
+// 	width: 100%;
+// 	height: 10px;
+// 	left: 50%;
+// 	transform: translateX(-50%);
+// }
+
+.image-container, .text-container {
 	width: 100%;
-	height: 10px;
-	left: 50%;
-	transform: translateX(-50%);
 }
 
 .text-container {
 	margin-top: 25px;
-
 }
 
 .rotate-card1 {
@@ -169,11 +199,77 @@ input[type=text] {
 	li {
 		display: flex;
 		justify-content: space-between;
-		padding: 5px;
+		padding: 5px 0;
 	}
 }
 
+// Styling basketball net 
+.net {
+	position: absolute; // set body to pos-r
+	top: 0;
+	left: -20px;
+	opacity: 0.4;
+}
+.net-container {
+	position: relative;
+}
 
+.net-container:after {
+	display: block;
+	position: absolute;
+	background-image: linear-gradient(to left, rgba(255, 255, 255, 0) 0, black 100%);
+	height: 400px;
+	width: 25%;
+	content: '';
+}
 
+.logo {
+	max-width: 100%;
+	max-height: 100%;
+}
 
+.logo2 {
+	left: 1%;
+}
 
+.logo1 {
+	right: 1%;
+}
+
+.logo-container {
+	position: absolute;
+	top: 0;
+	height: 100px;
+	width: 100px;
+}
+
+.horizontal-bar {
+	background-color: white; 
+	position: absolute;
+	width: 100%;
+	height: 11px;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: all 0.2s;
+}
+
+.card-piping {
+	width: calc(100% + 20px);
+	height: calc(100% + 30px);
+	border: 2px solid black;
+	position: absolute;
+	background-color: rgba(0,0,0,0);
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.horizontal-pipe {
+	width: calc(100% + 20px);
+	position: absolute;
+	border: 1px solid black;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+}
