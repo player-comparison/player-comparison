@@ -30,12 +30,12 @@ function autocomplete(inp, arr) {
          
         /*for each item in the array...*/
             /*check if the item starts with the same letters as the text field value:*/
-            // orrysean switch from .substr to .includes() method because ES6!!! and also better search functionality
-            if (arr[y][2].toUpperCase().includes(val.toUpperCase()) ) {
+            // orrysean switch from .substr to .includes() method because ES6!!! and also better search functionality also limted number of results to 10
+            if (arr[y][2].toUpperCase().includes(val.toUpperCase()) && $(`.autocomplete-item`).length < 10 ) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
-                
+                b.setAttribute("class", "autocomplete-item");
                 // orrysean converted this into ES6 template literal. Ryan said leave it ugly. 
                 b.innerHTML = `<strong>${arr[y][2].substr(0, val.length)}${arr[y][2].substr(val.length)}<input type='hidden' value="${arr[y][2]}"></strong> `;
 
@@ -270,25 +270,11 @@ nba.updateCardColor = function(playerInfo, cardNumber) {
 };
 
 // Main source of stuff happening for submit click
-nba.mainAction = async function (playerName1, playerName2, players) {
-    // Variables with Player IDS
-    let playerOneID = nba.getPlayerID(playerName1, players);
-	let playerTwoID = nba.getPlayerID(playerName2, players);
-	// Variables with Player Information not including Statistics
-	let results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]);
-    let playerOneInfo = results[0];
-	let playerTwoInfo = results[1];
-    // Variables with Player Career Stats
-	let playerOneStats = results[2];
-	let playerTwoStats = results[3];
-    // console.log(playerOneStats, playerTwoStats);
+nba.mainAction = async function (playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, players) {
     nba.updateCardInfo(playerOneInfo,1);
-    console.log(playerOneInfo)
     nba.updateCardInfo(playerTwoInfo, 2);
-    // nba.updateCardStats(playerOneInfo, 1)
     nba.updateCardBackImage(playerOneID, 1);
 	nba.updateCardBackImage(playerTwoID, 2);
-	console.log(playerOneStats, playerTwoStats);
 	nba.updateCardStats(playerOneStats, 1);
 	nba.updateCardStats(playerTwoStats, 2);
 	nba.updateTeamLogo(playerOneInfo, 1);
@@ -298,13 +284,32 @@ nba.mainAction = async function (playerName1, playerName2, players) {
 };
 
 nba.init = async function() {
-	const playerList = await nba.getPlayerList();	
+    const playerList = await nba.getPlayerList();
+    let playerName1;
+    let playerName2;
+    let playerOneID;
+    let playerTwoID;
+    let results;
+    let playerOneInfo;
+    let playerTwoInfo;
+    let playerOneStats;
+    let playerTwoStats;
+
 	autocomplete(document.getElementById("myInput"), playerList);
 	autocomplete(document.getElementById("myInput2"), playerList);
-
-	$('#compare').on('click', function (e) {
-			e.preventDefault();	
-            nba.mainAction($("#myInput").val(), $("#myInput2").val(), playerList);
+    
+	$('#compare').on('click', async function (e) {
+            e.preventDefault();
+            playerName1 = $("#myInput").val();
+            playerName2 = $("#myInput2").val();
+            playerOneID = nba.getPlayerID(playerName1, playerList);
+            playerTwoID = nba.getPlayerID(playerName2, playerList);
+            results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]);
+            playerOneInfo = results[0];
+            playerTwoInfo = results[1];
+            playerOneStats = results[2];
+            playerTwoStats = results[3];
+            nba.mainAction(playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, playerList);
 	});
 
 };
