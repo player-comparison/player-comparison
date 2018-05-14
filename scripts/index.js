@@ -275,7 +275,6 @@ nba.updateCardColor = function(playerInfo, cardNumber) {
         $(`.card-back${cardNumber} .image-container .horizontal-bar`).css("background-color", `rgb(${teamColors[playerInfo[18]][0]})`);
         $(`.card-back${cardNumber} .card-piping`).css("border-color", `rgb(${teamColors[playerInfo[18]][1]})`);
     }
-	// card-back after element secondary colour	console.log(teamColors);
 };
 
 nba.updateSlider = function (playerStats, cardNumber) {
@@ -302,7 +301,6 @@ nba.mainAction = function (playerName1, playerName2, playerOneID, playerTwoID, p
 nba.updateSliderStats = function (playerStats, cardNumber) {
     sliderValue = $(`.card-back${cardNumber} .slider`).val() - 1;
     stats = playerStats.resultSets[0].rowSet[sliderValue];
-    console.log(playerStats.resultSets[0]);
     if (sliderValue < 0) {
         nba.updateCardStats(playerStats, cardNumber);
     } else {
