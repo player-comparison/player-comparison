@@ -339,8 +339,8 @@ nba.init = async function() {
         } else {
             $('#ballWrapper').css("display", "none");
             $('.wrapper').css("justify-content", "flex-start");
+            $('#vs').addClass("vsdisplay");
             $('.card-back').css("display", "none");
-            $('.vs').css("display", "none");
             playerName1 = $("#myInput").val();
             playerName2 = $("#myInput2").val();
             playerOneID = nba.getPlayerID(playerName1, playerList);
@@ -355,12 +355,12 @@ nba.init = async function() {
             playerOneStats = results[2];
             playerTwoStats = results[3];
             nba.mainAction(playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, playerList);
-            $('.vs').css("display", "block");
+            $('#vs').removeClass("vsdisplay");
             $('.card-back').css("display", "block");
         }
     });
     
-    $('.slider').on('mousemove change', async function (e) {
+    $('.slider').on('mousemove change touchmove', async function (e) {
         nba.updateSliderStats(playerOneStats, 1);
         nba.updateSliderStats(playerTwoStats, 2);
     });

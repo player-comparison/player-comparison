@@ -9,6 +9,7 @@ body {
 	background-size: cover;
 	background-position: 0 50px;
 	position: relative; // to position basketball net
+	min-width: 320px; /* Smallest width we are targetting */
 }
 
 .wrapper {
@@ -71,7 +72,8 @@ input[type=text] {
 	color: black;
 	line-height: 1;
 	border: none;
-	padding: 20px 30px;
+	padding: 0 30px;
+	height: 46px;
 	text-transform: uppercase;
 	font-weight: bold;
 	transition: all 0.2s;
@@ -220,6 +222,7 @@ input[type=text] {
 	left: -20px;
 	opacity: 0.4;
 	z-index: -1;
+	max-width: 100%;
 }
 
 .shotclock {
@@ -229,6 +232,7 @@ input[type=text] {
 	opacity: 0.4;
 	width: 350px;
 	z-index: -1;
+	max-width: 100%;
 }
 
 .net-container:after {
@@ -313,11 +317,15 @@ input[type=text] {
 }
 
 .vs {
-	display: none;
+	display: block;
 	font-size: 50px;
 	font-weight: bold;
 	color: white;
 	font-family: 'Orbitron', sans-serif;
+}
+
+.vsdisplay {
+	display: none;
 }
 
 .slidecontainer, .slider {
@@ -352,4 +360,91 @@ input[type=text] {
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
     cursor: pointer; /* Cursor on hover */
+}
+
+// ***** MEDIA QUERIES *****
+
+@media (max-width: 800px) {
+	#vs {
+		display: none;
+	}
+}
+
+@media (max-width: 720px) {
+	.card-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.card-back {
+		transform: rotateY(0) !important; /* Needed to override Animate.css stylings */
+	}
+	
+	.card-back1 {
+		margin-bottom: 50px;
+	}
+
+	.shotclock-container {
+		width: 50%;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	 .net-container {
+		width: 50%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	 }
+
+}
+
+@media (max-width: 650px) {
+	form {
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	#compare {
+		margin: 25px 0;
+		width: 50%;
+		min-width: 250px;
+	}
+
+	.autocomplete {
+		width: 50%;
+		min-width: 250px;
+	}
+
+
+}
+
+@media (max-width: 450px) {
+	.card-back {
+		width: 300px;
+	}
+
+	.title {
+		font-size: 40px;
+	}
+}
+
+@media (max-height: 670px) {
+	.net-container:after {
+		background-image: none;
+	}
+	
+	.net {
+		opacity: 0.2;
+	}
+
+	.shotclock-container:after {
+		background-image: none;
+	}
+	
+	.shotclock {
+		opacity: 0.2;
+	}
 }
