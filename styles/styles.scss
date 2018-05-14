@@ -311,6 +311,7 @@ input[type=text] {
 	outline: none;
 	opacity: 0.4;
 	transition: all 0.2s;
+
 }
 
 .slider:hover {
@@ -323,18 +324,18 @@ input[type=text] {
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
+    // -webkit-appearance: none; /* Override default look */
+    // appearance: none;
+    // width: 25px; /* Set a specific slider handle width */
+    // height: 25px; /* Slider handle height */
 }
 
-.slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-	height: 25px; /* Slider handle height */
-	-moz-appearance: none; /* Override default look */
-    appearance: none;
-}
+// .slider::-moz-range-thumb {
+//     width: 25px; /* Set a specific slider handle width */
+// 	height: 25px; /* Slider handle height */
+// 	-moz-appearance: none; /* Override default look */
+//     appearance: none;
+// }
 
 .stats-container li p {
 	font-size: 20px;
