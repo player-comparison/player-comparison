@@ -13,6 +13,8 @@ function autocomplete(inp, arr) {
         a = document.createElement("DIV");
         a.setAttribute("id", `${this.id}autocomplete-list`);
         a.setAttribute("class", "autocomplete-items");
+        a.style.overflowY = "auto";
+        a.style.height = "205px";
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
         
@@ -31,7 +33,7 @@ function autocomplete(inp, arr) {
         /*for each item in the array...*/
             /*check if the item starts with the same letters as the text field value:*/
             // orrysean switch from .substr to .includes() method because ES6!!! and also better search functionality also limted number of results to 10
-            if (arr[y][2].toUpperCase().includes(val.toUpperCase()) && $(`.autocomplete-item`).length < 10 ) {
+            if (arr[y][2].toUpperCase().includes(val.toUpperCase()) /* && $(`.autocomplete-item`).length < 10 */ ) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
@@ -48,7 +50,6 @@ function autocomplete(inp, arr) {
                     closeAllLists();
                 });
                 a.appendChild(b);
-                
             }
         }
     });
