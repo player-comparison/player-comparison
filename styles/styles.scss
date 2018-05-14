@@ -1,6 +1,5 @@
 @import 'partials/setup';
 @import 'partials/typography';
-@import 'partials/animations';
 
 body {
 	background-image: url(../images/background-image.jpg);
@@ -63,8 +62,6 @@ input[type=text] {
 	&:hover,
 	&:focus{
 		box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
-		// border: 1px solid white;
-		// margin-top: 3px;
 	}
 }
 #compare {
@@ -139,34 +136,13 @@ input[type=text] {
 	}
 }
 
-// .card-back:after {
-// 	content: '';
-// 	width: calc(100% + 20px);
-// 	height: calc(100% + 30px);
-// 	border: 2px solid black;
-// 	position: absolute;
-// 	background-color: rgba(0,0,0,0);
-// 	left: 50%;
-// 	top: 50%;
-// 	transform: translate(-50%, -50%);
-// }
-
-// .image-container::after {
-// 	content: '';
-// 	background-color: white; 
-// 	position: absolute;
-// 	width: 100%;
-// 	height: 10px;
-// 	left: 50%;
-// 	transform: translateX(-50%);
-// }
-
 .image-container, .text-container {
 	width: 100%;
 }
 
 .text-container {
 	padding: 20px;
+	font-family: 'Titillium Web', sans-serif;
 }
 
 .rotate-card1 {
@@ -330,11 +306,9 @@ input[type=text] {
 }
 
 .slider {
-	-webkit-appearance: none;
-	appearance: none;
 	background: transparent; /* Grey background */
 	outline: none;
-	opacity: 0.2;
+	opacity: 0.4;
 	transition: all 0.2s;
 }
 
@@ -356,7 +330,13 @@ input[type=text] {
 
 .slider::-moz-range-thumb {
     width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
+	height: 25px; /* Slider handle height */
+	-moz-appearance: none; /* Override default look */
+    appearance: none;
+}
+
+.stats-container li p {
+	font-size: 20px;
 }
 
 // ***** MEDIA QUERIES *****
