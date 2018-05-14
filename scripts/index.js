@@ -269,6 +269,12 @@ nba.updateCardColor = function(playerInfo, cardNumber) {
 	// card-back after element secondary colour	console.log(teamColors);
 };
 
+nba.updateSlider = function (playerStats, cardNumber) {
+    console.log(playerStats);
+    $(`.card-back${cardNumber} .slider`).attr("max", playerStats.resultSets[0].rowSet.length);
+    $(`.card-back${cardNumber} .slider`).val("1");
+};
+
 // Main source of stuff happening for submit click
 nba.mainAction = function (playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, players) {
     nba.updateCardInfo(playerOneInfo,1);
@@ -280,7 +286,9 @@ nba.mainAction = function (playerName1, playerName2, playerOneID, playerTwoID, p
 	nba.updateTeamLogo(playerOneInfo, 1);
 	nba.updateTeamLogo(playerTwoInfo, 2);
 	nba.updateCardColor(playerOneInfo, 1);
-	nba.updateCardColor(playerTwoInfo, 2);
+    nba.updateCardColor(playerTwoInfo, 2);
+    nba.updateSlider(playerOneStats, 1);
+    nba.updateSlider(playerTwoStats, 2);
 };
 
 nba.init = async function() {
@@ -299,7 +307,10 @@ nba.init = async function() {
     autocomplete(document.getElementById("myInput2"), playerList);
     
 	$('#compare').on('click', async function (e) {
-            e.preventDefault(); 
+        e.preventDefault(); 
+        if (document.getElementById("myInput").value === "" || document.getElementById("myInput2") === "") {
+            alert('Please choose two names.');
+        } else {
             $('#ballWrapper').css("display", "none");
             $('.wrapper').css("justify-content", "flex-start");
             $('.card-back').css("display", "none");
@@ -308,7 +319,10 @@ nba.init = async function() {
             playerName2 = $("#myInput2").val();
             playerOneID = nba.getPlayerID(playerName1, playerList);
             playerTwoID = nba.getPlayerID(playerName2, playerList);
-            results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]);
+            results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]).catch(function () {
+                // dispatch a failure and throw error
+                alert('Player not found! Try again.');
+            });;
             playerOneInfo = results[0];
             playerTwoInfo = results[1];
             playerOneStats = results[2];
@@ -316,7 +330,7 @@ nba.init = async function() {
             nba.mainAction(playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, playerList);
             $('.vs').css("display", "block");
             $('.card-back').css("display", "block");
-           
+        }
 	});
 
 };
