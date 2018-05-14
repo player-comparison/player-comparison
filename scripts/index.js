@@ -296,10 +296,14 @@ nba.init = async function() {
     let playerTwoStats;
 
 	autocomplete(document.getElementById("myInput"), playerList);
-	autocomplete(document.getElementById("myInput2"), playerList);
+    autocomplete(document.getElementById("myInput2"), playerList);
     
 	$('#compare').on('click', async function (e) {
-            e.preventDefault();
+            e.preventDefault(); 
+            $('#ballWrapper').css("display", "none");
+            $('.wrapper').css("justify-content", "flex-start");
+            $('.card-back').css("display", "none");
+            $('.vs').css("display", "none");
             playerName1 = $("#myInput").val();
             playerName2 = $("#myInput2").val();
             playerOneID = nba.getPlayerID(playerName1, playerList);
@@ -310,8 +314,9 @@ nba.init = async function() {
             playerOneStats = results[2];
             playerTwoStats = results[3];
             nba.mainAction(playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, playerList);
+            $('.vs').css("display", "block");
             $('.card-back').css("display", "block");
-            $('#ballWrapper').css("display", "none");
+           
 	});
 
 };

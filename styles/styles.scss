@@ -27,6 +27,7 @@ form {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 50px;
 }
 
@@ -43,7 +44,7 @@ form {
   /*the container must be positioned relative:*/
 	position: relative;
 	display: inline-block;
-	width: 360px;
+	width: calc(100%/3);
 }
 
 input {
@@ -74,7 +75,6 @@ input[type=text] {
 	text-transform: uppercase;
 	font-weight: bold;
 	transition: all 0.2s;
-	margin: 0 auto;
 	border: 3px solid transparent;
 	&:hover {
 		border: 3px solid white;
@@ -307,3 +307,12 @@ input[type=text] {
 	margin-bottom: 20px;
 	font-size: 20px;
 }
+
+.vs {
+	display: none;
+	font-size: 50px;
+	font-weight: bold;
+	color: white;
+	font-family: 'Orbitron', sans-serif;
+}
+
