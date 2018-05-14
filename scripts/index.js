@@ -270,7 +270,7 @@ nba.updateCardColor = function(playerInfo, cardNumber) {
 };
 
 // Main source of stuff happening for submit click
-nba.mainAction = async function (playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, players) {
+nba.mainAction = function (playerName1, playerName2, playerOneID, playerTwoID, playerOneInfo, playerTwoInfo, playerOneStats, playerTwoStats, players) {
     nba.updateCardInfo(playerOneInfo,1);
     nba.updateCardInfo(playerTwoInfo, 2);
     nba.updateCardBackImage(playerOneID, 1);

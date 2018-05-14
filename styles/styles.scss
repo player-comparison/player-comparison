@@ -20,6 +20,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	// display: none;
+	overflow: hidden;
 }
 
 form {
@@ -60,8 +61,8 @@ input[type=text] {
 	&:hover,
 	&:focus{
 		box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
-		border: 1px solid white;
-		margin-top: 3px;
+		// border: 1px solid white;
+		// margin-top: 3px;
 	}
 }
 #compare {
@@ -74,6 +75,7 @@ input[type=text] {
 	font-weight: bold;
 	transition: all 0.2s;
 	margin: 0 auto;
+	border: 3px solid transparent;
 	&:hover {
 		border: 3px solid white;
 		color: white;
@@ -169,13 +171,11 @@ input[type=text] {
 }
 
 .rotate-card1 {
-	transform: rotateY(25deg);
-	box-shadow: -5px 5px 20px black, 0 5px 40px black;
+	box-shadow: -5px 5px 10px black, 0 5px 10px black;
 }
 
 .rotate-card2 {
-	transform: rotateY(-25deg);
-	box-shadow: 5px 5px 20px black, 0 5px 40px black;
+	box-shadow: 5px 5px 10px black, 0 5px 10px black;
 }
 
 .rotate-card {
