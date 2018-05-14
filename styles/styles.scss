@@ -188,6 +188,7 @@ input[type=text] {
 	padding: 10px 0;
 	display: flex;
 	flex-wrap: wrap;
+	text-align: center;
 
 	.height, .number {
 		width: 50%;
@@ -326,5 +327,29 @@ input[type=text] {
 .slider {
 	appearance: none;
 	background: transparent; /* Grey background */
-    outline: none;
+	outline: none;
+	opacity: 0.2;
+	transition: all 0.2s;
+}
+
+.slider:hover {
+	opacity: 1;
+}
+
+.slider::-moz-focus-outer {
+    border: 0;
+    }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    cursor: pointer; /* Cursor on hover */
 }

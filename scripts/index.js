@@ -185,7 +185,6 @@ nba.updateCardInfo = function(infoArray, cardNumber) {
     // Number
     $(`.card-back${cardNumber} .number`).text(`Number: ${infoArray[13]}`);
     // Team Name
-    $(`.card-back${cardNumber} .team`).text(`${infoArray[20]} ${infoArray[17]}`);
 }
 
 nba.updateCardStats = function(playerStats, cardNumber) {
@@ -221,7 +220,8 @@ nba.updateCardStats = function(playerStats, cardNumber) {
 	$(`.card-back${cardNumber} .blocks p`).text(careerStats[20]);
 	$(`.card-back${cardNumber} .fg p`).text(`${Math.round(careerStats[8] * 1000)/10}%`);
 	$(`.card-back${cardNumber} .3pt p`).text(`${Math.round(careerStats[11] * 1000)/10}%`);
-	$(`.card-back${cardNumber} .gp p`).text(careerStats[3]);
+    $(`.card-back${cardNumber} .gp p`).text(careerStats[3]);
+    $(`.card-back${cardNumber} .team`).text(`Career Stats`);
 };
 
 nba.updateTeamLogo = function(playerInfo, cardNumber) {
@@ -261,18 +261,25 @@ nba.updateCardColor = function(playerInfo, cardNumber) {
 		UTA: ["0, 43, 92", "249, 160, 27"],
 		WAS: ["0, 43, 92", "227, 24, 55"],
 		SEA: ["0, 101, 58", "255, 194, 32"],
-	};
-	$(`.card-back${cardNumber}`).css("border-color", `rgb(${teamColors[playerInfo[18]][0]})`);
-	$(`.card-back${cardNumber}`).css("outline-color", `rgb(${teamColors[playerInfo[18]][0]})`);
-	$(`.card-back${cardNumber} .image-container .horizontal-bar`).css("background-color", `rgb(${teamColors[playerInfo[18]][0]})`);
-	$(`.card-back${cardNumber} .card-piping`).css("border-color", `rgb(${teamColors[playerInfo[18]][1]})`);
+    };
+    
+    if (teamColors[playerInfo[18]] === "" || teamColors[playerInfo[18]] === undefined) {
+        $(`.card-back${cardNumber}`).css("border-color", `#fff`);
+        $(`.card-back${cardNumber}`).css("outline-color", `#fff`);
+        $(`.card-back${cardNumber} .image-container .horizontal-bar`).css("background-color", `#fff`);
+        $(`.card-back${cardNumber} .card-piping`).css("border-color", `#000`);
+    } else {
+        $(`.card-back${cardNumber}`).css("border-color", `rgb(${teamColors[playerInfo[18]][0]})`);
+        $(`.card-back${cardNumber}`).css("outline-color", `rgb(${teamColors[playerInfo[18]][0]})`);
+        $(`.card-back${cardNumber} .image-container .horizontal-bar`).css("background-color", `rgb(${teamColors[playerInfo[18]][0]})`);
+        $(`.card-back${cardNumber} .card-piping`).css("border-color", `rgb(${teamColors[playerInfo[18]][1]})`);
+    }
 	// card-back after element secondary colour	console.log(teamColors);
 };
 
 nba.updateSlider = function (playerStats, cardNumber) {
-    console.log(playerStats);
     $(`.card-back${cardNumber} .slider`).attr("max", playerStats.resultSets[0].rowSet.length);
-    $(`.card-back${cardNumber} .slider`).val("1");
+    $(`.card-back${cardNumber} .slider`).val("0");
 };
 
 // Main source of stuff happening for submit click
@@ -289,6 +296,25 @@ nba.mainAction = function (playerName1, playerName2, playerOneID, playerTwoID, p
     nba.updateCardColor(playerTwoInfo, 2);
     nba.updateSlider(playerOneStats, 1);
     nba.updateSlider(playerTwoStats, 2);
+};
+
+nba.updateSliderStats = function (playerStats, cardNumber) {
+    sliderValue = $(`.card-back${cardNumber} .slider`).val() - 1;
+    stats = playerStats.resultSets[0].rowSet[sliderValue];
+    console.log(playerStats.resultSets[0]);
+    if (sliderValue < 0) {
+        nba.updateCardStats(playerStats, cardNumber);
+    } else {
+        $(`.card-back${cardNumber} .points p`).text(stats[26]);
+        $(`.card-back${cardNumber} .assists p`).text(stats[21]);
+        $(`.card-back${cardNumber} .steals p`).text(stats[22]);
+        $(`.card-back${cardNumber} .rebounds p`).text(stats[20]);
+        $(`.card-back${cardNumber} .blocks p`).text(stats[23]);
+        $(`.card-back${cardNumber} .fg p`).text(`${Math.round(stats[11] * 1000) / 10}%`);
+        $(`.card-back${cardNumber} .3pt p`).text(`${Math.round(stats[14] * 1000) / 10}%`);
+        $(`.card-back${cardNumber} .gp p`).text(stats[6]);
+        $(`.card-back${cardNumber} .team`).text(`${stats[1]} ${stats[4]}`);
+    }
 };
 
 nba.init = async function() {
@@ -319,10 +345,11 @@ nba.init = async function() {
             playerName2 = $("#myInput2").val();
             playerOneID = nba.getPlayerID(playerName1, playerList);
             playerTwoID = nba.getPlayerID(playerName2, playerList);
-            results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)]).catch(function () {
+            results = await Promise.all([nba.getPlayerInfo(playerOneID), nba.getPlayerInfo(playerTwoID), nba.getPlayerStats(playerOneID), nba.getPlayerStats(playerTwoID)])
+            .catch(function () {
                 // dispatch a failure and throw error
                 alert('Player not found! Try again.');
-            });;
+            });
             playerOneInfo = results[0];
             playerTwoInfo = results[1];
             playerOneStats = results[2];
@@ -331,7 +358,12 @@ nba.init = async function() {
             $('.vs').css("display", "block");
             $('.card-back').css("display", "block");
         }
-	});
+    });
+    
+    $('.slider').on('mousemove change', async function (e) {
+        nba.updateSliderStats(playerOneStats, 1);
+        nba.updateSliderStats(playerTwoStats, 2);
+    });
 
 };
 
