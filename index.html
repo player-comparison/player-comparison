@@ -35,10 +35,10 @@
             <div class="autocomplete">
                 <input id="myInput" type="text" name="myCountry" placeholder="Player One">
 			</div>
+			<button type="button" id="compare">Compare</button>
 			<div class="autocomplete">
 				<input id="myInput2" type="text" name="myCountry" placeholder="Player Two">
 			</div>
-           
 		</form>
 		
 
@@ -52,18 +52,23 @@
 			</div>
 		</div> -->
 		<div class="card-container">
-			<div class="card-back card-back1">
+			<div class="card-back card-back1 animated bounceInLeft">
 				<div class="image-container">
 					<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612761/2017/260x190/201942.png" alt="">
 				</div>
 				<div class="text-container">
-					<h2 class="name">Giannis Antetokounmpo</h2>
+					<h2 class="name"></h2>
 				
 					<div class="basic-info">
 						<p class="height"><span>Height:</span></p>
 						<p class="number"><span>Numebr:</span></p>
 						<p class="team"><span>Team Name:</span></p>
 					</div>
+
+					<div class="slidecontainer">
+						<input type="range" min="0" max="5" value="0" class="slider" id="myRange">
+					</div>
+
 					<ul class="stats-container">
 						<li class="points">
 							<h3>Points</h3>
@@ -100,10 +105,8 @@
 					</ul>
 				</div>
 			</div>
-
-			<button id="compare">Compare</p></button>
-
-			<div class="card-back card-back2">
+			<p id="vs"class="animated bounceInUp vs vsdisplay">VS</p>
+			<div class="card-back card-back2 animated bounceInRight">
 				<div class="image-container">
 					<img src="https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612761/2017/260x190/201942.png" alt="">
 				</div>
@@ -120,6 +123,11 @@
 							<span>Team Name:</span>
 						</p>
 					</div>
+
+					<div class="slidecontainer">
+						<input type="range" min="0" max="5" value="0" class="slider" id="myRange">
+					</div>
+
 					<ul class="stats-container">
 						<li class="points">
 							<h3>Points</h3>

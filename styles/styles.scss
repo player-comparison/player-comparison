@@ -9,6 +9,7 @@ body {
 	background-size: cover;
 	background-position: 0 50px;
 	position: relative; // to position basketball net
+	min-width: 320px; /* Smallest width we are targetting */
 }
 
 .wrapper {
@@ -20,12 +21,14 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	// display: none;
+	overflow: hidden;
 }
 
 form {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 50px;
 }
 
@@ -42,7 +45,7 @@ form {
   /*the container must be positioned relative:*/
 	position: relative;
 	display: inline-block;
-	width: 360px;
+	width: calc(100%/3);
 }
 
 input {
@@ -60,8 +63,8 @@ input[type=text] {
 	&:hover,
 	&:focus{
 		box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
-		border: 1px solid white;
-		margin-top: 3px;
+		// border: 1px solid white;
+		// margin-top: 3px;
 	}
 }
 #compare {
@@ -69,11 +72,12 @@ input[type=text] {
 	color: black;
 	line-height: 1;
 	border: none;
-	padding: 20px 30px;
+	padding: 0 30px;
+	height: 46px;
 	text-transform: uppercase;
 	font-weight: bold;
 	transition: all 0.2s;
-	margin: 0 auto;
+	border: 3px solid transparent;
 	&:hover {
 		border: 3px solid white;
 		color: white;
@@ -169,13 +173,11 @@ input[type=text] {
 }
 
 .rotate-card1 {
-	transform: rotateY(25deg);
-	box-shadow: -5px 5px 20px black, 0 5px 40px black;
+	box-shadow: -5px 5px 10px black, 0 5px 10px black;
 }
 
 .rotate-card2 {
-	transform: rotateY(-25deg);
-	box-shadow: 5px 5px 20px black, 0 5px 40px black;
+	box-shadow: 5px 5px 10px black, 0 5px 10px black;
 }
 
 .rotate-card {
@@ -188,6 +190,7 @@ input[type=text] {
 	padding: 10px 0;
 	display: flex;
 	flex-wrap: wrap;
+	text-align: center;
 
 	.height, .number {
 		width: 50%;
@@ -218,6 +221,8 @@ input[type=text] {
 	top: 0;
 	left: -20px;
 	opacity: 0.4;
+	z-index: -1;
+	max-width: 100%;
 }
 
 .shotclock {
@@ -226,6 +231,8 @@ input[type=text] {
 	right: 0;
 	opacity: 0.4;
 	width: 350px;
+	z-index: -1;
+	max-width: 100%;
 }
 
 .net-container:after {
@@ -285,6 +292,7 @@ input[type=text] {
 	background-color: rgba(0,0,0,0);
 	left: 50%;
 	top: 50%;
+	z-index: -1;
 	transform: translate(-50%, -50%);
 }
 
@@ -306,4 +314,137 @@ input[type=text] {
 .player-select {
 	margin-bottom: 20px;
 	font-size: 20px;
+}
+
+.vs {
+	display: block;
+	font-size: 50px;
+	font-weight: bold;
+	color: white;
+	font-family: 'Orbitron', sans-serif;
+}
+
+.vsdisplay {
+	display: none;
+}
+
+.slidecontainer, .slider {
+    width: 100%; /* Width of the outside container */
+}
+
+.slider {
+	appearance: none;
+	background: transparent; /* Grey background */
+	outline: none;
+	opacity: 0.2;
+	transition: all 0.2s;
+}
+
+.slider:hover {
+	opacity: 1;
+}
+
+.slider::-moz-focus-outer {
+    border: 0;
+    }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    cursor: pointer; /* Cursor on hover */
+}
+
+// ***** MEDIA QUERIES *****
+
+@media (max-width: 800px) {
+	#vs {
+		display: none;
+	}
+}
+
+@media (max-width: 720px) {
+	.card-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.card-back {
+		transform: rotateY(0) !important; /* Needed to override Animate.css stylings */
+	}
+	
+	.card-back1 {
+		margin-bottom: 50px;
+	}
+
+	.shotclock-container {
+		width: 50%;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	 .net-container {
+		width: 50%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	 }
+
+}
+
+@media (max-width: 650px) {
+	form {
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	#compare {
+		margin: 25px 0;
+		width: 50%;
+		min-width: 250px;
+	}
+
+	.autocomplete {
+		width: 50%;
+		min-width: 250px;
+	}
+
+
+}
+
+@media (max-width: 450px) {
+	.card-back {
+		width: 300px;
+	}
+
+	.title {
+		font-size: 40px;
+	}
+}
+
+@media (max-height: 670px) {
+	.net-container:after {
+		background-image: none;
+	}
+	
+	.net {
+		opacity: 0.2;
+	}
+
+	.shotclock-container:after {
+		background-image: none;
+	}
+	
+	.shotclock {
+		opacity: 0.2;
+	}
 }
